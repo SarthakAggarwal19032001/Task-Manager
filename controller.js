@@ -12,6 +12,7 @@ function initEvents() {
     document.querySelector("#saveTask").addEventListener("click", saveTask);
     document.querySelector("#loadTask").addEventListener("click", loadTask);
     document.querySelector("#searchBox").addEventListener("change", loadTask);
+    document.querySelector("#updateTask").addEventListener("click", updateTask);
     generateHeader();
 }
 
@@ -63,6 +64,27 @@ function addTask() {
     showTask();
 }
 
+function updateTask(){
+    let person = prompt("What You Want to Update", "Enter name or desc ");
+    if(person=="name"){
+        let taskName=prompt("Enter The New Task Name","Enter new name here");
+        if(taskName!=null)
+        obj.updateTaskName(taskName);
+        saveTask();
+        showTask();
+    }
+    else if(person=="desc"){
+        let taskDesc =prompt("Enter The New Task Description","Enter new description here");
+        if(taskDesc!=null)
+        obj.updateTaskDesc(taskDesc);
+        saveTask();
+        showTask();
+    }
+    else{
+        alert("Wrong input");
+    }
+}
+
 function showTask() {
     body.innerHTML = "";
     obj.taskList.forEach(function(task) {
@@ -96,6 +118,8 @@ function selectTask() {
 function deleteTask() {
     obj.deleteTask();
     showTask();
+    saveTask();
+    
 }
 
 function saveTask() {

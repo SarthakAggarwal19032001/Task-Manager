@@ -14,6 +14,11 @@ class Task {
         this.selected = false;
         this.date = new Date();
     }
+    // constructor(name) {
+    //     this.name = name;
+    //     this.selected = false;
+    //     this.date = new Date();
+    // }
 }
 
 var obj = {
@@ -35,10 +40,37 @@ var obj = {
         // console.log(toggleTask);
     },
 
+    updateTaskName : function(newdata){
+        for(var i=0;i<this.taskList.length;i++){
+            if(this.taskList[i].selected==true){
+                this.taskList[i].name=newdata;
+                this.taskList[i].date=new Date();
+                break;
+            }
+        }
+    },
+
+    updateTaskDesc : function(newdata){
+        for(var i=0;i<this.taskList.length;i++){
+            if(this.taskList[i].selected==true){
+                this.taskList[i].details=newdata;
+                this.taskList[i].date=new Date();
+                break;
+            }
+        }
+    },
+
     deleteTask : function() {
-        this.taskList = this.taskList.filter(function(taskObj) {
-            return taskObj.selected == false;
-        })
+        var i;
+        for(i=0;i<this.taskList.length;i++){
+            if(this.taskList[i].selected==true){
+                this.taskList.splice(i,1);
+                break;
+            }
+        }
+        for(var j=i;j<this.taskList.length;j++){
+            this.taskList[j].id=this.taskList[j].id-1;
+        }
     },
 
     sortTask : function(key, order) {
